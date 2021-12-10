@@ -1,31 +1,33 @@
 package com.vazirna.dimagibot.commands;
 
 import java.io.IOException;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import java.util.List;
+
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import picocli.CommandLine.Command;
 
 @Command(
-	  name = "lorem-ipsum"
+	  name = "lorem-ipsum",
+	  description ="Generates Lorem Ipsum text"
 	)
 public class GenerateLoremIpsum implements Runnable {
 	
+	@SuppressWarnings("unchecked")
 	public void run() {
        
 		System.out.println("Contacting 3rd party to generate text ...");
+		ObjectMapper mapper = new ObjectMapper();
 		
 		try (CloseableHttpClient client = HttpClients.createDefault()) {
 	
-			   HttpGet request = new HttpGet("https://montanaflynn-lorem-text-generator.p.rapidapi.com/paragraph?count=1&length=3");
-			   request.addHeader("x-rapidapi-key", "ecef80588fmsh62566eecb86bc02p1c04f1jsnaca7e87ea6e0");
+			   HttpGet request = new HttpGet("https://baconipsum.com/api/?type=meat-and-filler");
+			   Object response = client.execute(request, httpResponse -> mapper.readValue(httpResponse.getEntity().getContent(), Object.class));
 			   
-	
-			   CloseableHttpResponse response = client.execute(request);
-			   
-			   System.out.println(response.getEntity().getContent());
+			   System.out.println(((List<String>)response).get(0));
 			   
 			} catch (IOException e) {
 				

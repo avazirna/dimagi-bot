@@ -7,7 +7,8 @@ import java.util.Scanner;
 import picocli.CommandLine.Command;
 
 @Command(
-  name = "history"
+  name = "history",
+  description = "Lists the commands history" 
 )
 public class CommandHistory implements Runnable {
     
