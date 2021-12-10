@@ -30,7 +30,7 @@ public class CurrentTime implements Runnable {
     		String area = "";
     		do {
     			System.out.println("In which area is the city located?");
-    			System.out.println("1 - Africa\n2 - Europe\n3 - Asia");
+    			System.out.println("1 - Africa\n2 - Europe\n3 - Asia\n4 - America");
     			areaOption = sc.nextInt();
     			
     			switch (areaOption) {
@@ -43,11 +43,14 @@ public class CurrentTime implements Runnable {
 					case 3:
 						area = "Asia";
 						break;
+					case 4:
+						area = "America";
+						break;
 					default:
 						System.out.println("Invalid option, try again!");
 						break;
 				}
-    		}while(areaOption <1 || areaOption >3);
+    		}while(areaOption <1 || areaOption >4);
     		
     		System.out.println("Contacting 3rd party, please bear with me ...");
     		String remoteTime = getTimeOfRemoteCity(area, city);
